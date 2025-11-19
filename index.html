@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkRelief — 可攜式按摩墊應用</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🏞️ ParkRelief</h1>
+            <p class="subtitle">隨時隨地緩解疼痛</p>
+        </header>
+
+        <!-- Product Introduction -->
+        <section class="product-intro card">
+            <h2>產品介紹</h2>
+            <p>ParkRelief 是為高齡者設計的可攜式按摩解決方案。無論在公園還是任何地方，按一按就能立即緩解腰酸背痛。</p>
+            <ul style="text-align: left; margin-top: 10px;">
+                <li>✓ 隨身攜帶，即放即用</li>
+                <li>✓ 簡單大按鈕操作</li>
+                <li>✓ 自動記錄健康數據</li>
+                <li>✓ 與家人共享紀錄</li>
+            </ul>
+        </section>
+
+        <!-- Main Control Panel -->
+        <section class="control-panel card">
+            <h2>按摩控制</h2>
+
+            <!-- Status Display -->
+            <div class="status-display">
+                <p class="status-label">目前狀態</p>
+                <p id="status" class="status-text">未啟動</p>
+                <p id="timer" class="timer-text">--:--</p>
+                <p id="syncStatus" class="sync-status">同步狀態: --</p>
+            </div>
+
+            <!-- Control Buttons Row 1 -->
+            <div class="button-group">
+                <button id="startBtn" class="btn btn-primary btn-large">
+                    ▶️ 開始按摩
+                </button>
+                <button id="stopBtn" class="btn btn-danger btn-large" disabled>
+                    ⏹️ 停止按摩
+                </button>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="settings-section">
+                <div class="setting-item">
+                    <label for="painArea">疼痛部位：</label>
+                    <select id="painArea" class="input-select">
+                        <option value="腰部">腰部</option>
+                        <option value="背部">背部</option>
+                        <option value="肩頸">肩頸</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <label for="intensity">按摩強度：</label>
+                    <div class="intensity-slider">
+                        <input type="range" id="intensity" min="1" max="10" value="5" class="slider">
+                        <span id="intensityValue" class="intensity-value">5</span> / 10
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <label for="duration">時間（分鐘）：</label>
+                    <input type="number" id="duration" min="1" max="60" value="15" class="input-number">
+                </div>
+
+                <div class="setting-item">
+                    <label for="notes">備註：</label>
+                    <textarea id="notes" class="input-textarea" placeholder="例如：背痛特別明顯..."></textarea>
+                </div>
+            </div>
+
+            <!-- Control Buttons Row 2 -->
+            <div class="button-group">
+                <button id="saveBtn" class="btn btn-success" disabled>
+                    💾 儲存紀錄
+                </button>
+                <button id="shareBtn" class="btn btn-info">
+                    🔗 分享連結
+                </button>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="history-section card">
+            <h2>按摩紀錄</h2>
+            <div id="eventList" class="event-list">
+                <p class="placeholder">暫無紀錄</p>
+            </div>
+            <button id="refreshBtn" class="btn btn-secondary">
+                🔄 刷新紀錄
+            </button>
+        </section>
+
+        <!-- Share Modal -->
+        <div id="shareModal" class="modal hidden">
+            <div class="modal-content">
+                <h3>分享連結</h3>
+                <p>將以下連結分享給家人或照護者，他們可以看到你的按摩紀錄。</p>
+                <div class="share-link-box">
+                    <input type="text" id="shareLink" class="share-link-input" readonly>
+                    <button id="copyBtn" class="btn btn-small btn-primary">複製</button>
+                </div>
+                <button id="closeShareBtn" class="btn btn-small btn-secondary">關閉</button>
+            </div>
+            <div id="shareModalBackdrop" class="modal-backdrop"></div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>ParkRelief v1.0 | TDD 驅動開發 | 使用 GUN.js 去中心化同步</p>
+            <p id="debugInfo" class="debug-info"></p>
+        </footer>
+    </div>
+
+    <!-- CDN 載入 -->
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

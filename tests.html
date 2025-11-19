@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkRelief 測試套組 | Mocha</title>
+    
+    <!-- Mocha & Chai 樣式 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha/mocha.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+        .header p {
+            margin: 0;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        #mocha {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .test-info {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧪 ParkRelief 測試套組</h1>
+        <p>TDD 單元測試 | 使用 Mocha + Chai</p>
+    </div>
+
+    <div class="test-info">
+        <h3>📋 測試說明</h3>
+        <ul>
+            <li><strong>綠色 ✓</strong>: 測試通過</li>
+            <li><strong>紅色 ✗</strong>: 測試失敗（需修復程式碼）</li>
+            <li><strong>黃色 ⊙</strong>: 測試被跳過</li>
+        </ul>
+        <p><strong>開啟瀏覽器開發工具 (F12)</strong> 查看詳細的錯誤訊息。</p>
+    </div>
+
+    <!-- Mocha 測試容器 -->
+    <div id="mocha"></div>
+
+    <!-- 外部套件 (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/mocha/mocha.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chai/chai.js"></script>
+    
+    <!-- Mocha 設定 -->
+    <script>
+        mocha.setup('bdd');
+        mocha.slow(500);
+        mocha.timeout(10000);
+    </script>
+
+    <!-- 應用邏輯 (必須在測試之前載入) -->
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="../app.js"></script>
+
+    <!-- 測試檔案 -->
+    <script src="tests.js"></script>
+
+    <!-- 執行測試 -->
+    <script>
+        mocha.run(function(failures) {
+            console.log('測試執行完成，失敗數:', failures);
+            if (failures === 0) {
+                console.log('✅ 所有測試通過！');
+            } else {
+                console.log('❌ 有', failures, '個測試失敗');
+            }
+        });
+    </script>
+</body>
+</html>
